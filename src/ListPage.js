@@ -2,12 +2,24 @@ import Movies from "./Movies";
 
 const ListPage = ({ movies, shownMovies, search, checked, error }) => {
   const checkGenre = (movie) => {
+    // if (movie.genreList && checked.length !== 0) {
+    //   let foundG = false;
+    //   movie.genreList.forEach((el) => {
+    //     let gName = el.value.toLowerCase();
+    //     if (checked.includes(gName)) {
+    //       foundG = true;
+    //     }
+    //   });
     if (movie.genreList && checked.length !== 0) {
-      let foundG = false;
-      movie.genreList.forEach((el) => {
-        let gName = el.value.toLowerCase();
-        if (checked.includes(gName)) {
-          foundG = true;
+      let foundG = true;
+      let newGList = [];
+      movie.genreList.forEach((element) => {
+        newGList.push(element.value.toLowerCase());
+      });
+      checked.forEach((el) => {
+        let gName = el.toLowerCase();
+        if (!newGList.includes(gName)) {
+          foundG = false;
         }
       });
       return foundG;
